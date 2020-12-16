@@ -1,12 +1,15 @@
 package Simulator;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public interface IWorldMap extends IPositionChangeObserver{
 
     Vector2d getMapSize();
     boolean canMoveTo(Vector2d position);
+    ArrayList<Animal> getAnimalsList();
     void updateEnergy();
     void removeAnimal(Animal animal, Vector2d position);
     void place(Animal animal);

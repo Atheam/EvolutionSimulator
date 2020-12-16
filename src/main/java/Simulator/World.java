@@ -1,11 +1,17 @@
 package Simulator;
 
 
-import java.util.Random;
+
 
 public class World {
+
+
     public static void main(String[] args) {
-        Vector2d mapSize = new Vector2d(10,10);
+
+        javafx.application.Application.launch(SimulationStartUp.class);
+    }
+
+    /* public static void main(String[] args) { Vector2d mapSize = new Vector2d(10,10);
         Vector2d jungleSize = new Vector2d(5,4);
         Vector2d junglePosition = new Vector2d(mapSize.x/4,mapSize.y/4);
         float energyCost = 1;
@@ -26,6 +32,5 @@ public class World {
         IWorldMap map = new GrassMap(mapSize,junglePosition,jungleSize,grassEnergy);
         SimulationEngine engine = new SimulationEngine(map,startPositions,energyCost,startEnergy);
         engine.run();
-
-    }
+        }*/
 }

@@ -110,18 +110,7 @@ public class SimulationEngine implements IEngine{
     }
 
     public void run(){
-
-        for(int i = 0; i <10000 ;i++){
-            System.out.println("iteration " + i);
-            System.out.println("n " + this.animals.size());
-            MapVisualizer visualizer = new MapVisualizer(map);
-            System.out.print(visualizer.draw(new Vector2d(0,0),new Vector2d(this.map.getMapSize().x, this.map.getMapSize().y)));
             this.dayCycle();
-
-
-
-        }
-
     }
 
 

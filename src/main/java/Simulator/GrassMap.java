@@ -6,18 +6,30 @@ import java.util.*;
 
 public class GrassMap extends AbstractWorldMap{
 
-    private final Vector2d jungleSize;
-    private final Vector2d junglePosition;
+
+
+    public final Vector2d jungleSize;
+    public final Vector2d junglePosition;
     private final float grassEnergy;
 
 
     private final Map<Vector2d,Grass> grasses = new LinkedHashMap<>();
 
+    public Vector2d getJungleSize() {
+        return jungleSize;
+    }
 
-    public GrassMap(Vector2d mapSize, Vector2d junglePosition, Vector2d jungleSize,float grassEnergy){
+    public Vector2d getJunglePosition() {
+        return junglePosition;
+    }
+
+
+    public GrassMap(Vector2d mapSize, Vector2d jungleSize,float grassEnergy){
         this.mapSize = mapSize;
         this.jungleSize = jungleSize;
-        this.junglePosition = junglePosition;
+        int x = Math.round((mapSize.x-jungleSize.x)/2);
+        int y = Math.round((mapSize.y - jungleSize.y)/2);
+        this.junglePosition =  new Vector2d(x,y);
         this.grassEnergy = grassEnergy;
     }
 
@@ -26,6 +38,10 @@ public class GrassMap extends AbstractWorldMap{
         int x = Math.floorMod(position.x,mapSize.x);
         int y = Math.floorMod(position.y,mapSize.y);
         return new Vector2d(x,y);
+    }
+
+    public Set<Vector2d> getGrassPositions(){
+        return this.grasses.keySet();
     }
 
     @Override
@@ -60,8 +76,8 @@ public class GrassMap extends AbstractWorldMap{
 
     private void growGrassInSteppe(){
         Random randomizer = new Random();
-        int x = randomizer.nextInt(jungleSize.x) + junglePosition.x;
-        int y = randomizer.nextInt(jungleSize.y) + junglePosition.y;
+        int x = randomizer.nextInt(mapSize.x) ;
+        int y = randomizer.nextInt(mapSize.y) ;
         Vector2d potentialPosition = new Vector2d(x,y);
         int count = 0;
         while(isInJungle(potentialPosition) || isOccupied(potentialPosition)){
@@ -80,7 +96,7 @@ public class GrassMap extends AbstractWorldMap{
 
 
     public boolean isInJungle(Vector2d position){
-        return position.follows(junglePosition)&& position.precedes(junglePosition.add(jungleSize));
+        return position.follows(junglePosition)&& position.precedes(junglePosition.add(jungleSize.subtract(new Vector2d(1,1))));
     }
 
     @Override

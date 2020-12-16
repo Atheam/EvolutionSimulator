@@ -20,6 +20,17 @@ abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{
     public abstract Vector2d mapPosition(Vector2d position);
 
     @Override
+    public ArrayList<Animal> getAnimalsList(){
+        ArrayList<Animal> list = new ArrayList<>();
+        for(List<Animal> animals : animals.values()){
+            for(Animal animal: animals){
+                list.add(animal);
+            }
+        }
+        return list;
+    }
+
+    @Override
     public boolean canMoveTo(Vector2d position) {
         return true;
     }
