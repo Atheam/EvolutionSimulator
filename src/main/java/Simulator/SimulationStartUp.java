@@ -36,7 +36,7 @@ public class SimulationStartUp extends Application {
 
         MapView mapView = new MapView(this.map);
         mapView.setPrefSize(800,600);
-        
+
         rootPane.setLeft(statPanel);
         rootPane.setRight(mapView);
         BorderPane.setAlignment(mapView,Pos.CENTER);
