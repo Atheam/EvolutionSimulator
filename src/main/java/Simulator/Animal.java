@@ -13,12 +13,24 @@ public class Animal {
     private final List<IPositionChangeObserver> observers = new ArrayList<>();
     private float energy;
     private final Genotype genotype;
-    private int numOfChildren = 0;
     private int daysAlive =1;
+    private int deathDay = 0;
+    private List<Animal> children = new ArrayList<>();
 
     public float getEnergy(){ return this.energy;}
 
-
+    public void setDeathDay(int day){
+        this.deathDay = day;
+    }
+    public int getDeathDay(){
+        return this.deathDay;
+    }
+    public void addChild(Animal animal){
+        this.children.add(animal);
+    }
+    public List<Animal> getChildren(){
+        return this.children;
+    }
 
     public Animal(IWorldMap map, Vector2d position,Genotype genotype) {
         this.map = map;
@@ -42,12 +54,7 @@ public class Animal {
     }
 
 
-    public void addChildNum(){
-        this.numOfChildren+=1;
-    }
-    public int getNumOfChildren(){
-        return this.numOfChildren;
-    }
+
 
     public void setEnergy(float energy) {
         this.energy = energy;

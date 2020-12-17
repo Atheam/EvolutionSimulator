@@ -1,0 +1,11 @@
+{ 
+  "mapWidth": 20,
+  "mapHeight": 20,
+  "jungleWidth": 12,
+  "jungleHeight": 12,
+  "grassEnergy": 15,
+  "energyLoss": 1,
+  "startEnergy" : 70,
+  "startNumber" : 12
+ 
+}

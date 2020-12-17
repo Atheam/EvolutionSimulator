@@ -12,6 +12,7 @@ public class SimulationEngine implements IEngine{
     private final float energyLoss;
     private final float startEnergy;
     private final StatTrack statTrack;
+    private int daysCount = 0;
 
     public SimulationEngine(IWorldMap map,Vector2d[] startPositions,float energyCost,float startEnergy,StatTrack statTrack){
         this.energyLoss = energyCost;
@@ -84,13 +85,11 @@ public class SimulationEngine implements IEngine{
             this.animals.add(animal);
             this.statTrack.addGenes(animal.getGenotype());
 
-
-
             animal.setEnergy(firstParentEnergy*0.25f + secondParentEnergy*0.25f);
             firstParent.subtractEnergy(firstParentEnergy*0.25f);
             secondParent.subtractEnergy(secondParentEnergy*0.25f);
-            firstParent.addChildNum();
-            secondParent.addChildNum();
+            firstParent.addChild(animal);
+            secondParent.addChild(animal);
 
 
         }
@@ -108,6 +107,8 @@ public class SimulationEngine implements IEngine{
     }
 
     private void dayCycle(){
+        daysCount++;
+        this.statTrack.daysUpdate(daysCount);
         decreaseEnergy();
         removeDead();
         animalsSpawn();

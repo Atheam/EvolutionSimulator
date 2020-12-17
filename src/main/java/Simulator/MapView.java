@@ -1,23 +1,52 @@
 package Simulator;
 
 
+
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-
+import java.util.List;
 
 
 public class MapView extends StackPane {
 
     private Canvas canvas;
-    private final int objectSize = 20;
+    private final int objectSize = 15;
     private GrassMap map;
-
-    public MapView(GrassMap map){
+    private Config config;
+    private StatTrack statTrack;
+    private Vector2d clickedPosition;
+    private Stage stage;
+    public MapView(GrassMap map,Stage stage,Config config){
+        this.config = config;
         this.map = map;
+        this.stage = stage;
+        setPrefSize(map.getMapSize().x*objectSize,map.getMapSize().y*objectSize);
         this.canvas = new Canvas(map.getMapSize().x*objectSize,map.getMapSize().y*objectSize);
+        this.canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                int x = (int) event.getX() / objectSize;
+                int y = (int) event.getY()/ objectSize;
+                clickedPosition =new Vector2d(x,y);
+                if(map.getAnimals().get(clickedPosition) != null) openDialog();
+            }
+        });
+
         this.getChildren().addAll(canvas);
         draw();
     }
@@ -34,7 +63,7 @@ public class MapView extends StackPane {
     public void drawAnimals(GraphicsContext g){
         for(Animal animal : this.map.getAnimalsList()){
 
-            float R = Math.min(1,animal.getEnergy()/SimulationStartUp.START_ENERGY);
+            float R = Math.min(1,animal.getEnergy()/config.getStartEnergy());
 
             g.setFill(Color.color(R,0,0));
             g.fillRect(animal.getPosition().x*objectSize,animal.getPosition().y*objectSize,objectSize,objectSize);
@@ -46,6 +75,63 @@ public class MapView extends StackPane {
             g.setFill(Color.color(0.70,0.93,0.30));
             g.fillRect(v.x*objectSize,v.y*objectSize,objectSize,objectSize);
         }
+    }
+    public void colorBestAnimals(Genotype genotype){
+        GraphicsContext g = this.canvas.getGraphicsContext2D();
+        g.setFill(Color.BLUE);
+        for(Animal animal : this.map.getAnimalsList()){
+            if(animal.getGenotype().equals(genotype)) {
+                Vector2d pos = animal.getPosition();
+                g.fillRect(pos.x * objectSize, pos.y * objectSize, objectSize,objectSize);
+            }
+
+        }
+    }
+    public void setStatTrack(StatTrack statTrack){
+        this.statTrack = statTrack;
+    }
+
+    public void openDialog(){
+        Button info = new Button("Show animal info");
+
+
+        info.setOnAction(this::showAnimalInfo);
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.NONE);
+        dialog.initOwner(stage);
+        HBox dialogHBox = new HBox(20);
+
+        Button tracking = new Button("Start tracking this animal");
+        tracking.setOnAction(event -> {
+            startTracking(event);
+            Text text = new Text("Animal is now being tracked");
+            dialogHBox.getChildren().add(text);
+        });
+        dialogHBox.getChildren().addAll(info,tracking);
+        Scene dialogScene = new Scene(dialogHBox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
+        dialog.setAlwaysOnTop(true);
+
+
+    }
+    public void startTracking(ActionEvent event){
+        this.statTrack.addTracking(clickedPosition);
+    }
+    public void showAnimalInfo(ActionEvent event){
+
+        Animal animal = this.map.getAnimals().get(clickedPosition).get(0);
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.NONE);
+        dialog.initOwner(stage);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text("Genotype of clicked animal : \n "+animal.getGenotype().toString()));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
+        dialog.setAlwaysOnTop(true);
+
+
     }
 
 

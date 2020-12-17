@@ -1,0 +1,8 @@
+Statistics at day: 480 
+Animals alive: 43 
+Grass number: 17 
+Average animal energy: 34.480064 
+Dominating genotype : 0 0 0 1 1 1 2 2 2 2 2 2 2 3 3 3 3 4 4 4 5 6 6 6 6 6 7 7 7 7 7 7  
+Average animal life span: 104.487183 
+Average animal energy: 34.480064 
+Average animal energy: 2.162791 

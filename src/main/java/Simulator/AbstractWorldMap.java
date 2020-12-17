@@ -19,6 +19,10 @@ abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{
 
     public abstract Vector2d mapPosition(Vector2d position);
 
+    public Map<Vector2d,List<Animal>> getAnimals(){
+        return this.animals;
+    }
+
     @Override
     public ArrayList<Animal> getAnimalsList(){
         ArrayList<Animal> list = new ArrayList<>();
