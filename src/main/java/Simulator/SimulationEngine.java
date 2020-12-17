@@ -11,16 +11,21 @@ public class SimulationEngine implements IEngine{
     private final List<Animal> animals = new ArrayList<>();
     private final float energyLoss;
     private final float startEnergy;
+    private final StatTrack statTrack;
 
-    public SimulationEngine(IWorldMap map,Vector2d[] startPositions,float energyCost,float startEnergy){
+    public SimulationEngine(IWorldMap map,Vector2d[] startPositions,float energyCost,float startEnergy,StatTrack statTrack){
         this.energyLoss = energyCost;
         this.startEnergy = startEnergy;
+        this.statTrack = statTrack;
         this.map = map;
         for(Vector2d v: startPositions){
             Animal animal = new Animal(map,v,startEnergy);
             this.animals.add(animal);
+            this.statTrack.addGenes(animal.getGenotype());
         }
     }
+
+
 
     private void removeDead(){
         Iterator<Animal> i = this.animals.iterator();
@@ -28,8 +33,10 @@ public class SimulationEngine implements IEngine{
             Animal animal = i.next();
             if(animal.getEnergy() <= 0) {
                 this.map.removeAnimal(animal, animal.getPosition());
+                this.statTrack.animalDeathUpdate(animal);
                 i.remove();
             }
+            else animal.addDaysAlive();
 
         }
     }
@@ -70,19 +77,20 @@ public class SimulationEngine implements IEngine{
             float secondParentEnergy = secondParent.getEnergy();
 
             if(secondParentEnergy < startEnergy*0.5) continue;
+
             Vector2d freePlace = this.map.getFreePlace(v);
-
-
             Animal animal = new Animal(this.map,freePlace,firstParent.getGenotype().combineGenes(secondParent.getGenotype()));
 
             this.animals.add(animal);
+            this.statTrack.addGenes(animal.getGenotype());
 
 
 
             animal.setEnergy(firstParentEnergy*0.25f + secondParentEnergy*0.25f);
             firstParent.subtractEnergy(firstParentEnergy*0.25f);
             secondParent.subtractEnergy(secondParentEnergy*0.25f);
-
+            firstParent.addChildNum();
+            secondParent.addChildNum();
 
 
         }

@@ -11,23 +11,34 @@ public class SimulatorControl {
     private Timeline timeline;
     private IEngine engine;
     private MapView mapView;
+    private StatPanel statPanel;
+    private int dayNum = 0;
 
     public SimulatorControl(IEngine engine,MapView mapView){
+
         this.mapView = mapView;
         this.engine = engine;
         this.timeline = new Timeline(new KeyFrame(Duration.millis(100), this::step));
         this.timeline.setCycleCount(Animation.INDEFINITE);
-        this.timeline.play();
+    }
+
+    public void setStatPanel(StatPanel statPanel){
+        this.statPanel = statPanel;
+    }
+    public int getDayNum(){
+        return dayNum;
     }
 
     private void step(ActionEvent actionEvent){
         this.engine.run();
         this.mapView.draw();
+        this.dayNum+=1;
+        this.statPanel.updateStats();
     }
-    private void start(){
+    public void start(){
         this.timeline.play();
     }
-    private void stop(){
+    public void stop(){
         this.timeline.stop();
     }
 

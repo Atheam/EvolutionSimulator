@@ -13,6 +13,8 @@ public class Animal {
     private final List<IPositionChangeObserver> observers = new ArrayList<>();
     private float energy;
     private final Genotype genotype;
+    private int numOfChildren = 0;
+    private int daysAlive =1;
 
     public float getEnergy(){ return this.energy;}
 
@@ -24,6 +26,12 @@ public class Animal {
         this.genotype = genotype;
         map.place(this);
     }
+    public void addDaysAlive(){
+        this.daysAlive+=1;
+    }
+    public int getDaysAlive(){
+        return this.daysAlive;
+    }
 
     public Animal(IWorldMap map, Vector2d position,float startEnergy) {
         this.energy = startEnergy;
@@ -33,6 +41,13 @@ public class Animal {
         map.place(this);
     }
 
+
+    public void addChildNum(){
+        this.numOfChildren+=1;
+    }
+    public int getNumOfChildren(){
+        return this.numOfChildren;
+    }
 
     public void setEnergy(float energy) {
         this.energy = energy;

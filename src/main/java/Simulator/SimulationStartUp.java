@@ -14,8 +14,9 @@ import java.util.Random;
 public class SimulationStartUp extends Application {
     private GrassMap map;
     private IEngine engine;
-    private final int MAP_WIDTH = 25;
-    private final int MAP_HEIGHT = 25;
+    private StatTrack statTrack;
+    private final int MAP_WIDTH = 20;
+    private final int MAP_HEIGHT = 20;
     private final int JUNGLE_WIDTH = 12;
     private final int JUNGLE_HEIGHT = 12;
     private final float GRASS_ENERGY = 15;
@@ -31,11 +32,19 @@ public class SimulationStartUp extends Application {
         BorderPane rootPane = new BorderPane();
         rootPane.setPrefSize(1000,600);
 
-        StatPanel statPanel = new StatPanel();
-        statPanel.setPrefSize(200,600);
-
         MapView mapView = new MapView(this.map);
         mapView.setPrefSize(800,600);
+
+
+        SimulatorControl simulatorControl = new SimulatorControl(this.engine,mapView);
+
+        StatPanel statPanel = new StatPanel(simulatorControl,this.map,this.statTrack);
+        statPanel.setPrefSize(200,600);
+
+        simulatorControl.setStatPanel(statPanel);
+
+
+
 
         rootPane.setLeft(statPanel);
         rootPane.setRight(mapView);
@@ -47,7 +56,7 @@ public class SimulationStartUp extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        SimulatorControl simulatorControl = new SimulatorControl(this.engine,mapView);
+
 
     }
 
@@ -58,8 +67,6 @@ public class SimulationStartUp extends Application {
         this.map = new GrassMap(mapSize,jungleSize,GRASS_ENERGY);
 
 
-
-
         Vector2d[] startPositions = new Vector2d[START_NUMBER];
         Random randomizer = new Random();
         for(int i = 0; i < START_NUMBER;i++){
@@ -68,8 +75,8 @@ public class SimulationStartUp extends Application {
             Vector2d v = new Vector2d(x,y);
             startPositions[i] = v;
         }
-
-        this.engine = new SimulationEngine(map,startPositions,ENERGY_LOSS,START_ENERGY);
+        this.statTrack = new StatTrack(map);
+        this.engine = new SimulationEngine(map,startPositions,ENERGY_LOSS,START_ENERGY,this.statTrack);
 
     }
 }

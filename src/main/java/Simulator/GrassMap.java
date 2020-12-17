@@ -27,8 +27,8 @@ public class GrassMap extends AbstractWorldMap{
     public GrassMap(Vector2d mapSize, Vector2d jungleSize,float grassEnergy){
         this.mapSize = mapSize;
         this.jungleSize = jungleSize;
-        int x = Math.round((mapSize.x-jungleSize.x)/2);
-        int y = Math.round((mapSize.y - jungleSize.y)/2);
+        int x = (int) Math.round((mapSize.x-jungleSize.x)/2.0) ;
+        int y = (int) Math.round((mapSize.y - jungleSize.y)/2.0) ;
         this.junglePosition =  new Vector2d(x,y);
         this.grassEnergy = grassEnergy;
     }

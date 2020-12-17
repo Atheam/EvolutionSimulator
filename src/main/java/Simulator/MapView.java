@@ -17,7 +17,6 @@ public class MapView extends StackPane {
 
     public MapView(GrassMap map){
         this.map = map;
-
         this.canvas = new Canvas(map.getMapSize().x*objectSize,map.getMapSize().y*objectSize);
         this.getChildren().addAll(canvas);
         draw();
@@ -28,7 +27,6 @@ public class MapView extends StackPane {
         g.fillRect(0,0,this.canvas.getWidth(),this.canvas.getHeight());
         g.setFill(Color.GREEN);
         g.fillRect(this.map.getJunglePosition().x * objectSize, this.map.getJunglePosition().y * objectSize,this.map.getJungleSize().x * objectSize,this.map.getJungleSize().y * objectSize);
-
         drawAnimals(g);
         drawGrasses(g);
 
@@ -42,6 +40,7 @@ public class MapView extends StackPane {
             g.fillRect(animal.getPosition().x*objectSize,animal.getPosition().y*objectSize,objectSize,objectSize);
         }
     }
+
     public void drawGrasses(GraphicsContext g){
         for(Vector2d v: this.map.getGrassPositions()){
             g.setFill(Color.color(0.70,0.93,0.30));

@@ -21,6 +21,7 @@ public class Genotype {
 
     public Genotype(){ }
 
+
     public void fixGenotype(){
 
         Random randomizer = new Random();
@@ -34,9 +35,28 @@ public class Genotype {
             this.genes[replacedIndex] = missingGene;
             this.genesCount[missingGene]++;
             this.genesCount[geneReplaced]--;
-
-            Arrays.sort(this.genes);
         }
+        Arrays.sort(this.genes);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder genesBuilder = new StringBuilder();
+        for(Integer gene : this.genes) genesBuilder.append(gene.toString()).append(" ");
+        return genesBuilder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Arrays.hashCode(this.genes);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Genotype)) return false;
+        Genotype genotype = (Genotype) obj;
+        return Arrays.equals(this.genes,genotype.genes);
     }
 
     public Genotype combineGenes(Genotype genotype){
