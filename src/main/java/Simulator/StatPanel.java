@@ -2,9 +2,11 @@ package Simulator;
 
 import javafx.event.ActionEvent;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
@@ -43,6 +45,11 @@ public class StatPanel extends VBox {
         saveToFile.setOnAction(statTrack::saveToFile);
         this.getChildren().addAll(start,stop,bestAnimals,makeNewBoard,checkTracked,saveToFile);
         this.initializeStats();
+        setSpacing(10);
+        setStyle("-fx-background-color: #EEEEEE");
+        setBorder(new Border(new BorderStroke(Color.LIGHTBLUE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
     }
 
     private void handleStart(ActionEvent actionEvent){
@@ -60,6 +67,7 @@ public class StatPanel extends VBox {
 
     }
     private void initializeStats(){
+
         dayNumber = new Text("Day: " + this.simulatorControl.getDayNum());
         animalsCount = new Text("Animals alive: " + this.statTrack.getAnimalsCount());
         grassCount = new Text("Grass count: " + this.statTrack.getGrassCount());

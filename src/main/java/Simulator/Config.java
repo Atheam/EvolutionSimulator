@@ -13,6 +13,7 @@ public class Config {
     private float energyLoss;
     private float startEnergy;
     private int startNumber;
+    private int objectSize;
 
 
     public int getMapWidth() {
@@ -45,6 +46,10 @@ public class Config {
 
     public int getStartNumber() {
         return startNumber;
+    }
+
+    public int getObjectSize() {
+        return objectSize;
     }
 
     public Config(){

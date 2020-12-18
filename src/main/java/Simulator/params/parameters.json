@@ -6,6 +6,7 @@
   "grassEnergy": 15,
   "energyLoss": 1,
   "startEnergy" : 70,
-  "startNumber" : 12
+  "startNumber" : 12,
+  "objectSize" : 20
  
 }

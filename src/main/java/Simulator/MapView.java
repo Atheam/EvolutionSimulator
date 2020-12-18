@@ -5,6 +5,7 @@ package Simulator;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,17 +25,19 @@ import java.util.List;
 public class MapView extends StackPane {
 
     private Canvas canvas;
-    private final int objectSize = 15;
+    private final int objectSize;
     private GrassMap map;
     private Config config;
     private StatTrack statTrack;
     private Vector2d clickedPosition;
     private Stage stage;
-    public MapView(GrassMap map,Stage stage,Config config){
+    public MapView(GrassMap map,Stage stage,Config config,int objectSize){
+
+        this.objectSize = objectSize;
         this.config = config;
         this.map = map;
         this.stage = stage;
-        setPrefSize(map.getMapSize().x*objectSize,map.getMapSize().y*objectSize);
+        setPrefSize(800,600);
         this.canvas = new Canvas(map.getMapSize().x*objectSize,map.getMapSize().y*objectSize);
         this.canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
@@ -42,8 +45,11 @@ public class MapView extends StackPane {
 
                 int x = (int) event.getX() / objectSize;
                 int y = (int) event.getY()/ objectSize;
-                clickedPosition =new Vector2d(x,y);
-                if(map.getAnimals().get(clickedPosition) != null) openDialog();
+                Vector2d position =new Vector2d(x,y);
+                if(map.getAnimals().get(position) != null) {
+                    clickedPosition = position;
+                    openDialog();
+                }
             }
         });
 
@@ -93,22 +99,20 @@ public class MapView extends StackPane {
 
     public void openDialog(){
         Button info = new Button("Show animal info");
-
-
         info.setOnAction(this::showAnimalInfo);
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
-        HBox dialogHBox = new HBox(20);
-
+        VBox dialogVBox = new VBox(20);
         Button tracking = new Button("Start tracking this animal");
+        dialogVBox.setAlignment(Pos.CENTER);
         tracking.setOnAction(event -> {
             startTracking(event);
             Text text = new Text("Animal is now being tracked");
-            dialogHBox.getChildren().add(text);
+            dialogVBox.getChildren().add(text);
         });
-        dialogHBox.getChildren().addAll(info,tracking);
-        Scene dialogScene = new Scene(dialogHBox, 300, 200);
+        dialogVBox.getChildren().addAll(info,tracking);
+        Scene dialogScene = new Scene(dialogVBox, 300, 200);
         dialog.setScene(dialogScene);
         dialog.show();
         dialog.setAlwaysOnTop(true);
@@ -125,8 +129,9 @@ public class MapView extends StackPane {
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
         VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("Genotype of clicked animal : \n "+animal.getGenotype().toString()));
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialogVbox.setAlignment(Pos.CENTER);
+        dialogVbox.getChildren().add(new Text("Genotype of clicked animal : \n"+animal.getGenotype().toString()));
+        Scene dialogScene = new Scene(dialogVbox, 350, 200);
         dialog.setScene(dialogScene);
         dialog.show();
         dialog.setAlwaysOnTop(true);

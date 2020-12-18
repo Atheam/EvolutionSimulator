@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Random;
@@ -23,20 +24,24 @@ public class SimulationSetUp {
 
         rootPane.setPrefSize(1000,600);
 
-        MapView mapView = new MapView(this.map,stage,config);
+        MapView mapView = new MapView(this.map,stage,config,config.getObjectSize());
         mapView.setStatTrack(this.statTrack);
 
         SimulatorControl simulatorControl = new SimulatorControl(this.engine,mapView);
 
         StatPanel statPanel = new StatPanel(simulatorControl,this.statTrack,mapView,stage);
-        statPanel.setPrefSize(200,600);
+
+
+
+
 
         simulatorControl.setStatPanel(statPanel);
 
 
         rootPane.setLeft(statPanel);
-        rootPane.setRight(mapView);
-        BorderPane.setAlignment(mapView, Pos.CENTER);
+        rootPane.setCenter(mapView);
+
+
 
 
         Scene scene = new Scene(rootPane,1000,600);

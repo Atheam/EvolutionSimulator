@@ -1,6 +1,7 @@
 package Simulator;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -107,7 +108,9 @@ public class StatTrack {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
+
         HBox dialogHBox = new HBox(20);
+        dialogHBox.setAlignment(Pos.CENTER);
         dialogHBox.getChildren().addAll(trackingInfo);
         Scene dialogScene = new Scene(dialogHBox, 300, 200);
         dialog.setScene(dialogScene);

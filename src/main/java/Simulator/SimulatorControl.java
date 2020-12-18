@@ -18,7 +18,7 @@ public class SimulatorControl {
 
         this.mapView = mapView;
         this.engine = engine;
-        this.timeline = new Timeline(new KeyFrame(Duration.millis(5), this::step));
+        this.timeline = new Timeline(new KeyFrame(Duration.millis(3), this::step));
         this.timeline.setCycleCount(Animation.INDEFINITE);
     }
 
