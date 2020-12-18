@@ -21,6 +21,12 @@ public class Genotype {
 
     public Genotype(){ }
 
+    /**
+     * Fixes this genotype genes so that there is at least
+     * one gene of every type in a genes list
+     * Also orders the genes
+     */
+
 
     public void fixGenotype(){
 
@@ -39,25 +45,12 @@ public class Genotype {
         Arrays.sort(this.genes);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder genesBuilder = new StringBuilder();
-        for(Integer gene : this.genes) genesBuilder.append(gene.toString()).append(" ");
-        return genesBuilder.toString();
-    }
+    /**
+     * Combines two parents genotypes into one child genotype
+     * @param genotype genotype to be combined with this animal's genotype
+     * @return resulting new genotype
+     */
 
-    @Override
-    public int hashCode() {
-        return java.util.Arrays.hashCode(this.genes);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Genotype)) return false;
-        Genotype genotype = (Genotype) obj;
-        return Arrays.equals(this.genes,genotype.genes);
-    }
 
     public Genotype combineGenes(Genotype genotype){
 
@@ -86,6 +79,12 @@ public class Genotype {
         return childGenotype;
     }
 
+    /**
+     * Gets places at which to split genotypes while combining
+     * @param geneTotal number of genes in a gene list
+     * @return array of places indicating splits
+     */
+
     public int[] getSplits(int geneTotal){
         Random randomizer = new Random();
         int[] splits = new int[2];
@@ -94,9 +93,34 @@ public class Genotype {
         return splits;
     }
 
+    /**
+     * Gets a direction based on this genotype genes
+     * @return map direction generated from this genotype genes
+     */
+
     public MapDirection getDirection(){
         Random randomizer = new Random();
         return MapDirection.values()[genes[randomizer.nextInt(this.geneTotal)]];
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder genesBuilder = new StringBuilder();
+        for(Integer gene : this.genes) genesBuilder.append(gene.toString()).append(" ");
+        return genesBuilder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Arrays.hashCode(this.genes);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Genotype)) return false;
+        Genotype genotype = (Genotype) obj;
+        return Arrays.equals(this.genes,genotype.genes);
     }
 
 

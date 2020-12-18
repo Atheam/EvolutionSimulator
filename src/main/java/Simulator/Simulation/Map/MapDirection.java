@@ -3,29 +3,6 @@ package Simulator;
 public enum MapDirection {
     NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST;
 
-    public String toString() {
-        switch(this) {
-            case NORTH:
-                return "North";
-            case NORTHEAST:
-                return "North East";
-            case EAST:
-                return "East";
-            case SOUTHEAST:
-                return "South East";
-            case SOUTH:
-                return "South";
-            case SOUTHWEST:
-                return "South West";
-            case WEST:
-                return "West";
-            case NORTHWEST:
-                return "North West";
-            default:
-                return null;
-
-        }
-    }
 
     public MapDirection next(){
        return MapDirection.values()[(this.ordinal()+1)%values().length];

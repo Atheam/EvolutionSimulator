@@ -27,7 +27,9 @@ public class SimulationEngine implements IEngine{
     }
 
 
-
+    /**
+     * Removes animals with energy less or equal to 0 from the map
+     */
     private void removeDead(){
         Iterator<Animal> i = this.animals.iterator();
         while(i.hasNext()){
@@ -42,17 +44,25 @@ public class SimulationEngine implements IEngine{
         }
     }
 
+    /**
+     * Handles movement of all the animals
+     */
     private void animalsMove(){
         for(Animal animal : animals ){
             animal.move(animal.getGenotype().getDirection());
         }
     }
 
+    /**
+     * Handles eating action of animals
+     */
     private void animalsEat(){
         map.updateEnergy();
     }
 
-
+    /**
+     * Handles breeding action of all the animals
+     */
     private void animalsSpawn(){
         Random randomizer = new Random();
 
@@ -97,15 +107,25 @@ public class SimulationEngine implements IEngine{
 
     }
 
+    /**
+     * Handles grass growth at a given day
+     */
     private void grassSpawn(){
         this.map.mapCycle();
     }
+
+    /**
+     * Handles energy loss of all the animals in a given day
+     */
     private void decreaseEnergy(){
         for(Animal animal : this.animals){
             animal.subtractEnergy(energyLoss);
         }
     }
 
+    /**
+     * Handles performance of all the cyclic actions in every day
+     */
     private void dayCycle(){
         daysCount++;
         this.statTrack.daysUpdate(daysCount);
@@ -118,6 +138,9 @@ public class SimulationEngine implements IEngine{
 
     }
 
+    /**
+     * Handles one day cycle
+     */
     public void run(){
             this.dayCycle();
     }

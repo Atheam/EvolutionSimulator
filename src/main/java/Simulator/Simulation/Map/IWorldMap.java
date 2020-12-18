@@ -8,6 +8,8 @@ import java.util.Set;
 public interface IWorldMap extends IPositionChangeObserver{
 
     Vector2d getMapSize();
+
+
     boolean canMoveTo(Vector2d position);
     ArrayList<Animal> getAnimalsList();
     void updateEnergy();

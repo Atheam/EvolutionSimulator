@@ -12,12 +12,11 @@ import java.io.FileReader;
 public class SimulationStartUp extends Application {
 
     public static Config config;
-
+    private final String PATH = ".\\src\\main\\java\\Simulator\\params\\parameters.json";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        config = readConfigFromJson(".\\src\\main\\java\\Simulator\\params\\parameters.json");
+        config = readConfigFromJson(PATH);
         new SimulationSetUp(primaryStage,config);
     }
 
@@ -25,9 +24,7 @@ public class SimulationStartUp extends Application {
         new SimulationSetUp(stage,config);
     }
 
-
     public Config readConfigFromJson(String filename){
-        System.out.print(filename);
         Gson gson = new Gson();
         Config config;
         try {

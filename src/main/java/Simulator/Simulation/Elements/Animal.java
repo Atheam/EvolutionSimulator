@@ -17,7 +17,9 @@ public class Animal {
     private int deathDay = 0;
     private List<Animal> children = new ArrayList<>();
 
-    public float getEnergy(){ return this.energy;}
+    public float getEnergy(){
+        return this.energy;
+    }
 
     public void setDeathDay(int day){
         this.deathDay = day;
@@ -25,36 +27,12 @@ public class Animal {
     public int getDeathDay(){
         return this.deathDay;
     }
-    public void addChild(Animal animal){
-        this.children.add(animal);
-    }
     public List<Animal> getChildren(){
         return this.children;
-    }
-
-    public Animal(IWorldMap map, Vector2d position,Genotype genotype) {
-        this.map = map;
-        this.position = position;
-        this.genotype = genotype;
-        map.place(this);
-    }
-    public void addDaysAlive(){
-        this.daysAlive+=1;
     }
     public int getDaysAlive(){
         return this.daysAlive;
     }
-
-    public Animal(IWorldMap map, Vector2d position,float startEnergy) {
-        this.energy = startEnergy;
-        this.map = map;
-        this.position = position;
-        this.genotype = new Genotype(32);
-        map.place(this);
-    }
-
-
-
 
     public void setEnergy(float energy) {
         this.energy = energy;
@@ -68,39 +46,61 @@ public class Animal {
         return this.position;
     }
 
-    public String toString() {
-        switch (direction) {
-            case NORTH:
-                return "N";
-            case WEST:
-                return "W";
-            case SOUTH:
-                return "S";
-            case EAST:
-                return "E";
-            case NORTHEAST:
-                return "NE";
-            case NORTHWEST:
-                return "NW";
-            case SOUTHEAST:
-                return "SE";
-            case SOUTHWEST:
-                return "SW";
-            default:
-                return null;
-        }
+    /**
+     * Adds an animal to a list of children
+     * @param animal child animal to added
+     */
+
+    public void addChild(Animal child){
+        this.children.add(child);
     }
+
+    public Animal(IWorldMap map, Vector2d position,Genotype genotype) {
+        this.map = map;
+        this.position = position;
+        this.genotype = genotype;
+        map.place(this);
+    }
+
+    public Animal(IWorldMap map, Vector2d position,float startEnergy) {
+        this.energy = startEnergy;
+        this.map = map;
+        this.position = position;
+        this.genotype = new Genotype(32);
+        map.place(this);
+    }
+
+    /**
+     * Increases the counter of days this animal is alive
+     */
+    public void addDaysAlive(){
+        this.daysAlive+=1;
+    }
+
+    /**
+     * Adds observer of this animal to list of observers
+     * @param observer observer to be added
+     */
 
     public void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);
     }
 
-
+    /**
+     * Informs all the observers that a position of this animal had changed
+     * @param oldPosition old position vector of animal
+     * @param newPosition new position vector of animal
+     */
     void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         for(IPositionChangeObserver observer : observers){
             observer.positionChanged(oldPosition,newPosition,this);
         }
     }
+
+    /**
+     * Handles animal move action
+     * @param direction direction at which animal moves
+     */
 
     public void move(MapDirection direction) {
         this.direction = direction;
@@ -110,9 +110,19 @@ public class Animal {
             this.position = newPosition;
         }
     }
+
+    /**
+     * Increases this animal energy level by a given amount
+     * @param addedEnergy energy to be added
+     */
     public void addEnergy(float addedEnergy) {
         this.energy += addedEnergy;
     }
+
+    /**
+     * Decreses this animal energy level by a given amount
+     * @param minusEnergy energy to be subtracted
+     */
     public void subtractEnergy(float minusEnergy){
         this.energy -= minusEnergy;
     }

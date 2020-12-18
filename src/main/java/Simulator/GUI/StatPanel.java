@@ -42,27 +42,34 @@ public class StatPanel extends VBox {
 
         Text panelTitle = new Text("Simulation Controls");
         panelTitle.setStyle("-fx-font-weight: bold");
+
         Button start = new Button("Start Simulation");
         start.setOnAction(this::handleStart);
+
         Button stop = new Button("Stop Simulation");
         stop.setOnAction(this::handleStop);
+
         Button bestAnimals = new Button("Color animals with best genotype");
         bestAnimals.setOnAction(this::colorBest);
-        Button makeNewBoard = new Button("Click to make new board");
+
+        Button makeNewBoard = new Button("Make new board");
         makeNewBoard.setOnAction(this::makeNewBoard);
+
         Button checkTracked = new Button("Check tracked animal");
         checkTracked.setOnAction(this::checkTracked);
-        Button saveToFile = new Button("Save current stat to file");
+
+        Button saveToFile = new Button("Save current status to file");
+        saveToFile.setOnAction(this.statTrack::saveToFile);
         saveToFile.setStyle(" margin-bottom: 50 ");
 
-
-
         this.getChildren().addAll(panelTitle,start,stop,bestAnimals,makeNewBoard,checkTracked,saveToFile);
+
         this.initializeStats();
+
         try {
             Text legendTitle = new Text("Legend: ");
             legendTitle.setStyle("-fx-font-weight: bold");
-            Image legend = new Image(new FileInputStream(".\\src\\main\\java\\Simulator\\params\\legend.png"));
+            Image legend = new Image(new FileInputStream(".\\src\\main\\java\\Simulator\\media\\legend.png"));
             ImageView legendView = new ImageView(legend);
             legendView.setFitHeight(150);
             legendView.setFitWidth(230);
@@ -80,9 +87,11 @@ public class StatPanel extends VBox {
     }
 
     private void handleStart(ActionEvent actionEvent){
+
         simulatorControl.start();
     }
     private void handleStop(ActionEvent actionEvent){
+
         simulatorControl.stop();
     }
 
@@ -91,7 +100,6 @@ public class StatPanel extends VBox {
     }
     private void colorBest(ActionEvent actionEvent){
         this.mapView.colorBestAnimals(this.statTrack.getBestGenotype());
-
     }
     private void initializeStats(){
         statisticsTitle = new Text("Statistics of current simulation:");
@@ -119,7 +127,6 @@ public class StatPanel extends VBox {
     public void makeNewBoard(ActionEvent actionEvent){
         Stage dialog = new Stage();
         dialog.initOwner(this.stage);
-
         SimulationStartUp.crateSimulation(dialog);
     }
 

@@ -102,7 +102,7 @@ public class StatTrack {
     public void showTrackingInfo(Stage stage){
         Text trackingInfo = new Text();
         if(this.trackedAnimal == null) trackingInfo.setText("No animal being tracked");
-        else if(this.trackedAnimal.getDeathDay() == 0) trackingInfo.setText("Animal is alive. \n this animal has "+ this.trackedAnimal.getChildren().size() + " children");
+        else if(this.trackedAnimal.getDeathDay() == 0) trackingInfo.setText("Animal is alive.\nThis animal has "+ this.trackedAnimal.getChildren().size() + " children");
         else trackingInfo.setText("Animal had been alive for " + trackedAnimal.getDaysAlive() + " days\n" + "Animal had died in day number " + trackedAnimal.getDeathDay() +
                                 "\nThis animal had " + trackedAnimal.getChildren().size() + " children in total");
         Stage dialog = new Stage();
@@ -118,10 +118,8 @@ public class StatTrack {
         dialog.setAlwaysOnTop(true);
     }
     public void saveToFile(ActionEvent event){
-
-
         try {
-            FileWriter fileWriter = new FileWriter(".\\src\\main\\java\\Simulator\\params\\stat.txt");
+            FileWriter fileWriter = new FileWriter(".\\src\\main\\java\\Simulator\\stats\\stat.txt");
             fileWriter.write(String.format("Statistics at day: %d \n", this.daysCount));
             fileWriter.write(String.format("Animals alive: %d \n", this.map.getAnimalsList().size()));
             fileWriter.write(String.format("Grass number: %d \n", this.map.getGrassPositions().size()));

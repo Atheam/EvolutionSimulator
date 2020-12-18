@@ -38,7 +38,8 @@ public class SimulatorControl {
     public void start(){
         this.timeline.play();
     }
-    public void stop(){
+    public void stop()
+    {
         this.timeline.stop();
     }
 

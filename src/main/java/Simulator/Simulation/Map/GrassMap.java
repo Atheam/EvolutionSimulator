@@ -23,6 +23,11 @@ public class GrassMap extends AbstractWorldMap{
         return junglePosition;
     }
 
+    public Set<Vector2d> getGrassPositions(){
+        return this.grasses.keySet();
+
+    }
+
 
     public GrassMap(Vector2d mapSize, Vector2d jungleSize,float grassEnergy){
         this.mapSize = mapSize;
@@ -31,7 +36,32 @@ public class GrassMap extends AbstractWorldMap{
         int y = (int) Math.round((mapSize.y - jungleSize.y)/2.0) ;
         this.junglePosition =  new Vector2d(x,y);
         this.grassEnergy = grassEnergy;
+
     }
+
+    /**
+     * Indicates if animal can move to a given position
+     *
+     * In case of Grass Map the return value is always true
+     * Because the map is continues at the borders and animals
+     * can be stacked on each other at a given position
+     *
+     * @param position position vector which is checked
+     * @return true if animal can move to a given position
+     *         false if animal cannot move to a given position
+     */
+
+    @Override
+    public boolean canMoveTo(Vector2d position) {
+        return true;
+    }
+
+    /**
+     * Transforms a given position into actual position on the map
+     *
+     * @param position position vector which is transformed
+     * @return actual position vector on the map
+     */
 
     @Override
     public Vector2d mapPosition(Vector2d position){
@@ -40,9 +70,10 @@ public class GrassMap extends AbstractWorldMap{
         return new Vector2d(x,y);
     }
 
-    public Set<Vector2d> getGrassPositions(){
-        return this.grasses.keySet();
-    }
+    /**
+     * Handles performing all of the actions
+     * that are done at every day cycle
+     */
 
     @Override
     public void mapCycle() {
@@ -51,6 +82,9 @@ public class GrassMap extends AbstractWorldMap{
     }
 
 
+    /**
+     * Handles growing one grass elements at a random jungle field
+     */
 
     private void growGrassInJungle(){
         Random randomizer = new Random();
@@ -73,6 +107,9 @@ public class GrassMap extends AbstractWorldMap{
         grasses.put(potentialPosition,new Grass(potentialPosition,this.grassEnergy));
     }
 
+    /**
+     * Handles growing one grass element at a random steppe field
+     */
 
     private void growGrassInSteppe(){
         Random randomizer = new Random();
@@ -94,10 +131,19 @@ public class GrassMap extends AbstractWorldMap{
         grasses.put(potentialPosition,new Grass(potentialPosition,this.grassEnergy));
     }
 
-
+    /**
+     * Checks if a given position lays in the jungle
+     * @param position position vector that is checked
+     * @return true if a given position is in the jungle
+     *         false if a given position is not in the jungle
+     */
     public boolean isInJungle(Vector2d position){
         return position.follows(junglePosition)&& position.precedes(junglePosition.add(jungleSize.subtract(new Vector2d(1,1))));
     }
+
+    /**
+     * Updated energy of all animals on the map
+     */
 
     @Override
     public void updateEnergy() {
@@ -120,6 +166,12 @@ public class GrassMap extends AbstractWorldMap{
 
     }
 
+    /**
+     * Gets an object or a list of elements at a given position
+     * Animals are prioritized over other elements
+     * @param position position vector which from the object is fetched
+     * @return an object at a given position
+     */
 
     @Override
     public Object objectsAt(Vector2d position) {

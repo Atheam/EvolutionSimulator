@@ -13,7 +13,5 @@ public class Grass {
         this.position = v;
     }
 
-    public String toString(){
-        return "*";
-    }
+
 }
