@@ -4,10 +4,7 @@ package Simulator;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;
-
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
