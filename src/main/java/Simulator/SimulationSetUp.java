@@ -19,15 +19,16 @@ public class SimulationSetUp {
     public SimulationSetUp(Stage stage,Config config){
         this.config = config;
         initializeSimulation();
+        stage.setTitle("Simulation");
 
         BorderPane rootPane = new BorderPane();
 
-        rootPane.setPrefSize(1000,600);
+        rootPane.setPrefSize(1000,700);
 
         MapView mapView = new MapView(this.map,stage,config,config.getObjectSize());
         mapView.setStatTrack(this.statTrack);
 
-        SimulatorControl simulatorControl = new SimulatorControl(this.engine,mapView);
+        SimulatorControl simulatorControl = new SimulatorControl(this.engine,mapView,config);
 
         StatPanel statPanel = new StatPanel(simulatorControl,this.statTrack,mapView,stage);
 
@@ -44,7 +45,7 @@ public class SimulationSetUp {
 
 
 
-        Scene scene = new Scene(rootPane,1000,600);
+        Scene scene = new Scene(rootPane,1000,700);
         scene.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {stage.setAlwaysOnTop(true); stage.setAlwaysOnTop(false);});
 
         stage.setScene(scene);

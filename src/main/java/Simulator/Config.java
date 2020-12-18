@@ -14,8 +14,10 @@ public class Config {
     private float startEnergy;
     private int startNumber;
     private int objectSize;
+    private int refreshSpeed;
 
 
+    public int getRefreshSpeed(){return refreshSpeed;}
     public int getMapWidth() {
         return mapWidth;
     }

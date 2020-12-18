@@ -14,11 +14,11 @@ public class SimulatorControl {
     private StatPanel statPanel;
     private int dayNum = 0;
 
-    public SimulatorControl(IEngine engine,MapView mapView){
+    public SimulatorControl(IEngine engine,MapView mapView,Config config){
 
         this.mapView = mapView;
         this.engine = engine;
-        this.timeline = new Timeline(new KeyFrame(Duration.millis(3), this::step));
+        this.timeline = new Timeline(new KeyFrame(Duration.millis(config.getRefreshSpeed()), this::step));
         this.timeline.setCycleCount(Animation.INDEFINITE);
     }
 

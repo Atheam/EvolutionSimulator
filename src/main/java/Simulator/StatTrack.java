@@ -108,7 +108,7 @@ public class StatTrack {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
-
+        dialog.setTitle("Animal tracking info");
         HBox dialogHBox = new HBox(20);
         dialogHBox.setAlignment(Pos.CENTER);
         dialogHBox.getChildren().addAll(trackingInfo);

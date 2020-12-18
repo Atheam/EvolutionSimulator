@@ -103,6 +103,7 @@ public class MapView extends StackPane {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
+        dialog.setTitle("Animal actions");
         VBox dialogVBox = new VBox(20);
         Button tracking = new Button("Start tracking this animal");
         dialogVBox.setAlignment(Pos.CENTER);
@@ -128,6 +129,7 @@ public class MapView extends StackPane {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
         dialog.initOwner(stage);
+        dialog.setTitle("Animal info");
         VBox dialogVbox = new VBox(20);
         dialogVbox.setAlignment(Pos.CENTER);
         dialogVbox.getChildren().add(new Text("Genotype of clicked animal : \n"+animal.getGenotype().toString()));

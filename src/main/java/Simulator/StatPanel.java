@@ -2,14 +2,20 @@ package Simulator;
 
 import javafx.event.ActionEvent;
 
-import javafx.geometry.Insets;
+
+
 import javafx.scene.control.Button;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 public class StatPanel extends VBox {
@@ -23,6 +29,7 @@ public class StatPanel extends VBox {
     private Text averageLifeSpan;
     private Text averageChildrenCount;
     private Text dayNumber;
+    private Text statisticsTitle;
     private Stage stage;
 
 
@@ -31,6 +38,10 @@ public class StatPanel extends VBox {
         this.statTrack = statTrack;
         this.simulatorControl = simulatorControl;
         this.mapView = mapView;
+
+
+        Text panelTitle = new Text("Simulation Controls");
+        panelTitle.setStyle("-fx-font-weight: bold");
         Button start = new Button("Start Simulation");
         start.setOnAction(this::handleStart);
         Button stop = new Button("Stop Simulation");
@@ -42,9 +53,25 @@ public class StatPanel extends VBox {
         Button checkTracked = new Button("Check tracked animal");
         checkTracked.setOnAction(this::checkTracked);
         Button saveToFile = new Button("Save current stat to file");
-        saveToFile.setOnAction(statTrack::saveToFile);
-        this.getChildren().addAll(start,stop,bestAnimals,makeNewBoard,checkTracked,saveToFile);
+        saveToFile.setStyle(" margin-bottom: 50 ");
+
+
+
+        this.getChildren().addAll(panelTitle,start,stop,bestAnimals,makeNewBoard,checkTracked,saveToFile);
         this.initializeStats();
+        try {
+            Text legendTitle = new Text("Legend: ");
+            legendTitle.setStyle("-fx-font-weight: bold");
+            Image legend = new Image(new FileInputStream(".\\src\\main\\java\\Simulator\\params\\legend.png"));
+            ImageView legendView = new ImageView(legend);
+            legendView.setFitHeight(150);
+            legendView.setFitWidth(230);
+            this.getChildren().addAll(legendTitle,legendView);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
         setSpacing(10);
         setStyle("-fx-background-color: #EEEEEE");
         setBorder(new Border(new BorderStroke(Color.LIGHTBLUE,
@@ -67,7 +94,8 @@ public class StatPanel extends VBox {
 
     }
     private void initializeStats(){
-
+        statisticsTitle = new Text("Statistics of current simulation:");
+        statisticsTitle.setStyle("-fx-font-weight: bold");
         dayNumber = new Text("Day: " + this.simulatorControl.getDayNum());
         animalsCount = new Text("Animals alive: " + this.statTrack.getAnimalsCount());
         grassCount = new Text("Grass count: " + this.statTrack.getGrassCount());
@@ -75,7 +103,7 @@ public class StatPanel extends VBox {
         averageEnergy = new Text("Average energy level: "+ this.statTrack.getAverageEnergy());
         averageLifeSpan = new Text("Average life span: "+this.statTrack.getLifeSpan());
         averageChildrenCount = new Text("Average children count: " + this.statTrack.getChildrenCount());
-        this.getChildren().addAll(dayNumber,animalsCount,grassCount,dominatingGenotype,averageEnergy,averageLifeSpan,averageChildrenCount);
+        this.getChildren().addAll(statisticsTitle,dayNumber,animalsCount,grassCount,dominatingGenotype,averageEnergy,averageLifeSpan,averageChildrenCount);
     }
 
     public void updateStats(){
