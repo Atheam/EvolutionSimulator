@@ -1,8 +1,11 @@
-package Simulator;
+package Simulator.GUI;
 
 
-
-
+import Simulator.Simulation.Config.Config;
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Logic.Genotype;
+import Simulator.Simulation.Map.GrassMap;
+import Simulator.Simulation.Math.Vector2d;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -11,7 +14,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;

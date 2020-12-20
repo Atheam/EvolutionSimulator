@@ -1,5 +1,10 @@
-package Simulator;
+package Simulator.GUI;
 
+
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Logic.Genotype;
+import Simulator.Simulation.Map.GrassMap;
+import Simulator.Simulation.Math.Vector2d;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

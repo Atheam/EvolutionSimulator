@@ -1,6 +1,6 @@
-package Simulator;
+package Simulator.GUI;
 
-
+import Simulator.Simulation.Config.Config;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;

@@ -1,4 +1,4 @@
-package Simulator;
+package Simulator.Simulation.Math;
 
 
 import java.util.Objects;

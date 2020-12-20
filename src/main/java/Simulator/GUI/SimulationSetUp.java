@@ -1,6 +1,11 @@
-package Simulator;
+package Simulator.GUI;
 
 
+import Simulator.Simulation.Config.Config;
+import Simulator.Simulation.Map.GrassMap;
+import Simulator.Simulation.IEngine;
+import Simulator.Simulation.SimulationEngine;
+import Simulator.Simulation.Math.Vector2d;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -15,7 +20,7 @@ public class SimulationSetUp {
     Config config;
 
 
-    public SimulationSetUp(Stage stage,Config config){
+    public SimulationSetUp(Stage stage, Config config){
         this.config = config;
         initializeSimulation();
 

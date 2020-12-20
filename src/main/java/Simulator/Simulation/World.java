@@ -1,5 +1,7 @@
-package Simulator;
+package Simulator.Simulation;
 
+
+import Simulator.GUI.SimulationStartUp;
 
 public class World {
 

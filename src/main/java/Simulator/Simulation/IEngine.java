@@ -1,4 +1,5 @@
-package Simulator;
+package Simulator.Simulation;
+
 
 public interface IEngine {
     /**

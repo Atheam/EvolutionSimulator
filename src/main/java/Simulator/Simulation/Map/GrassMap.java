@@ -1,4 +1,9 @@
-package Simulator;
+package Simulator.Simulation.Map;
+
+
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Elements.Grass;
+import Simulator.Simulation.Math.Vector2d;
 
 import java.util.*;
 
@@ -13,7 +18,7 @@ public class GrassMap extends AbstractWorldMap{
     private final float grassEnergy;
 
 
-    private final Map<Vector2d,Grass> grasses = new LinkedHashMap<>();
+    private final Map<Vector2d, Grass> grasses = new LinkedHashMap<>();
 
     public Vector2d getJungleSize() {
         return jungleSize;

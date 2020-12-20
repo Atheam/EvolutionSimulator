@@ -1,4 +1,7 @@
-package Simulator;
+package Simulator.Simulation.Map;
+
+
+import Simulator.Simulation.Math.Vector2d;
 
 public enum MapDirection {
     NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST;

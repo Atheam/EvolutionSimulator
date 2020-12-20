@@ -1,4 +1,7 @@
-package Simulator;
+package Simulator.Simulation.Map;
+
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Math.Vector2d;
 
 public interface IPositionChangeObserver {
 

@@ -1,4 +1,7 @@
-package Simulator;
+package Simulator.Simulation.Elements;
+
+
+import Simulator.Simulation.Math.Vector2d;
 
 public class Grass {
     private final Vector2d position;
@@ -8,7 +11,7 @@ public class Grass {
         return energy;
     }
 
-    public Grass(Vector2d v,float energy){
+    public Grass(Vector2d v, float energy){
         this.energy = energy;
         this.position = v;
     }

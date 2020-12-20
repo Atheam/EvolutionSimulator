@@ -1,4 +1,5 @@
-package Simulator;
+package Simulator.GUI;
+
 
 import javafx.event.ActionEvent;
 

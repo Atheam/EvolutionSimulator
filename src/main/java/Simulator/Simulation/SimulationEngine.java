@@ -1,4 +1,11 @@
-package Simulator;
+package Simulator.Simulation;
+
+
+import Simulator.GUI.StatTrack;
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Map.IWorldMap;
+import Simulator.Simulation.Math.Vector2d;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class SimulationEngine implements IEngine{
+public class SimulationEngine implements IEngine {
     private final IWorldMap map;
     private final List<Animal> animals = new ArrayList<>();
     private final float energyLoss;
@@ -14,7 +21,7 @@ public class SimulationEngine implements IEngine{
     private final StatTrack statTrack;
     private int daysCount = 0;
 
-    public SimulationEngine(IWorldMap map,Vector2d[] startPositions,float energyCost,float startEnergy,StatTrack statTrack){
+    public SimulationEngine(IWorldMap map, Vector2d[] startPositions, float energyCost, float startEnergy, StatTrack statTrack){
         this.energyLoss = energyCost;
         this.startEnergy = startEnergy;
         this.statTrack = statTrack;

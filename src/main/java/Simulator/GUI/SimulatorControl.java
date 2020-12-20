@@ -1,5 +1,8 @@
-package Simulator;
+package Simulator.GUI;
 
+
+import Simulator.Simulation.Config.Config;
+import Simulator.Simulation.IEngine;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,7 +17,7 @@ public class SimulatorControl {
     private StatPanel statPanel;
     private int dayNum = 0;
 
-    public SimulatorControl(IEngine engine,MapView mapView,Config config){
+    public SimulatorControl(IEngine engine, MapView mapView, Config config){
 
         this.mapView = mapView;
         this.engine = engine;

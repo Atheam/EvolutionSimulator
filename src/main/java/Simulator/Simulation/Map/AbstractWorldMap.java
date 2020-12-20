@@ -1,6 +1,9 @@
-package Simulator;
+package Simulator.Simulation.Map;
 
 
+import Simulator.Simulation.Elements.Animal;
+import Simulator.Simulation.Elements.Grass;
+import Simulator.Simulation.Math.Vector2d;
 import java.util.*;
 
 abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{

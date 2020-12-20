@@ -1,4 +1,11 @@
-package Simulator;
+package Simulator.Simulation.Elements;
+
+
+import Simulator.Simulation.Logic.Genotype;
+import Simulator.Simulation.Map.IPositionChangeObserver;
+import Simulator.Simulation.Map.IWorldMap;
+import Simulator.Simulation.Map.MapDirection;
+import Simulator.Simulation.Math.Vector2d;
 
 import java.util.ArrayList;
 import java.util.List;

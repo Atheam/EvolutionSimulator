@@ -1,4 +1,6 @@
-package Simulator;
+package Simulator.Simulation.Logic;
+
+import Simulator.Simulation.Map.MapDirection;
 
 import java.util.Arrays;
 import java.util.Random;
