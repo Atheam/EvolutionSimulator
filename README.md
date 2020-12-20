@@ -20,5 +20,7 @@ This way only animals with the best genotype will survive, just how we wanted it
 The simulation also provides tracking of a selected animal as well as customizable parameters (available at the file params.json) of each map you create, allowing
 you to have more fun and try out different combinations.
 
+The app was created using java and javafx library.
+
 
 
