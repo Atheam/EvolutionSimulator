@@ -107,8 +107,6 @@ public class SimulationEngine implements IEngine {
             secondParent.subtractEnergy(secondParentEnergy*0.25f);
             firstParent.addChild(animal);
             secondParent.addChild(animal);
-
-
         }
 
 

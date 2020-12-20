@@ -55,7 +55,7 @@ public class Animal {
 
     /**
      * Adds an animal to a list of children
-     * @param animal child animal to added
+     * @param child animal to added
      */
 
     public void addChild(Animal child){
