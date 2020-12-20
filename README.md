@@ -10,7 +10,7 @@ When an animal enters a square with a grass it eats it and gains some amount of 
 enter the same square at the same time, and both of these animals have the right amount of energy they breed, producing 
 a new animal which is spawn next to them. Genotype of a child is based on both genotypes of its parents, gene sequances of
 both parents are split in two places and the resulting genotype of the child is the merged chunks (2 from first parent 1 from the second)
-of genes. On the map you have steep and jungle fields, the jungle is usually smaller but grass growths faster in the jungle!
+of genes. On the map you have steep and jungle fields, the latter is usually smaller but grass growths faster in the jungle!
 
 Every animal's move is determined by using this animal's genotype, also each day every animal loses some amount of energy.
 This way only animals with the best genotype will survive, just how we wanted it to be simulating a real evolution!
